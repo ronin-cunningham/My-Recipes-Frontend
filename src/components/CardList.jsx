@@ -1,7 +1,9 @@
-import {RecipeCard} from "./RecipeCard";
+import { RecipeCard } from "./RecipeCard";
+import { useSelector } from "react-redux";
 
 export const CardList = () => {
-	const data = [];
+	const data = useSelector(state => state.recipeCards);
+
 	const cards = data.map(d => <RecipeCard title={d.title} />);
 
 	return (

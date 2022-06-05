@@ -12,3 +12,8 @@ function App() {
 }
 
 export default App;
+
+
+// TODO: 
+// Integrate redux into the app
+// Make a proper form

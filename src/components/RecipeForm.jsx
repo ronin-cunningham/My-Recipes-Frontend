@@ -1,6 +1,11 @@
-import "./RecipeForm.css";
+import "../styles/RecipeForm.css";
+import { useDispatch } from "react-redux";
+import { addRecipe } from "../actions/index.js";
 
 export const RecipeForm = () => {
+
+	const dispatch = useDispatch();
+	
 	return (
 		<form className="RecipeForm">
 			<label>
@@ -15,7 +20,7 @@ export const RecipeForm = () => {
 				Instructions:
 				<input type="text" />
 			</label>
-			<button>ads</button>
+			<button onClick={() => dispatch(addRecipe({title: 'test'}))}>Add</button>
 		</form>
 	);
 }
