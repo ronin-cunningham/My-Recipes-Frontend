@@ -3,9 +3,8 @@ import { useDispatch } from "react-redux";
 import { addRecipe } from "../actions/index.js";
 
 export const RecipeForm = () => {
-
 	const dispatch = useDispatch();
-	
+
 	return (
 		<form className="RecipeForm">
 			<label>
