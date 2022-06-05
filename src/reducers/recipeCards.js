@@ -1,4 +1,4 @@
-// Injecting data to initialize redux store
+// Injecting mock data to initialize redux store
 const defaultList = [
 	{
 		title: "Pizza",
