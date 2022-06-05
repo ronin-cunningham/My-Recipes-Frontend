@@ -1,3 +1,7 @@
+p {
+    margin: 15px;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -18,4 +22,11 @@
 
 .card-header {
 	border-bottom: 2px solid #111;
+}
+
+.delete-card {
+    background-color: rgb(23, 172, 97);
+    color: white;
+    border-radius: 5px;
+    border-color: rgb(23, 172, 97);
 }

@@ -6,7 +6,7 @@ export const RecipeForm = () => {
 	const dispatch = useDispatch();
 
 	return (
-		<form className="RecipeForm">
+		<form className="recipe-form">
 			<label>
 				Title:
 				<input type="text" />

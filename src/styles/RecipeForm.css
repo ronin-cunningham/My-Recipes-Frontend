@@ -1,5 +1,19 @@
-.RecipeForm {
+label {
+    padding-right: 10px;
+}
+
+.recipe-form {
 	display: flex;
 	flex-direction: column;
 	margin: 100px;
+}
+
+.recipe-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.recipe-field {
+    margin: 5px;
 }
