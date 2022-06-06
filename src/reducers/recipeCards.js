@@ -2,14 +2,14 @@
 const defaultList = [
 	{
 		title: "Pizza",
-		ingredients: ["dough", " salami", " cheese"],
-		instructions: ["Knead the dough", " add the salami and cheese", " bake in oven"],
+		ingredients: "dough, salami, cheese",
+		instructions: "Knead the dough, add the salami and cheese, bake in oven",
 		uniqueId: Math.random().toString(16).slice(2)
 	},
 	{
 		title: "Pasta",
-		ingredients: ["dough", " tomatoes", " cheese"],
-		instructions: ["Knead the dough", " add the tomatoes and cheese", " boil the pasta", " pour sauce"],
+		ingredients: "dough, tomatoes, cheese",
+		instructions: "Knead the dough, add the tomatoes and cheese, boil the pasta, pour sauce",
 		uniqueId: Math.random().toString(16).slice(2)
 	}
 ];
@@ -20,7 +20,7 @@ const recipeCards = (recipes = defaultList, action) => {
 		case 'ADD_RECIPE':
 			return [action.payload, ...recipes]
 		case 'DELETE_RECIPE':
-			return recipes.filter(recipe => recipe.id !== action.payload);
+			return recipes.filter(recipe => recipe.uniqueId !== action.payload);
 		default:
 			return recipes;
 	}

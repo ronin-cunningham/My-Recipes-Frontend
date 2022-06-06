@@ -15,5 +15,5 @@ export default App;
 
 
 // TODO: 
-// Integrate redux into the app
-// Make a proper form
+// Make detailed recipe view component
+// Do proper styling
