@@ -2,6 +2,7 @@ import "../styles/RecipeCard.css";
 import { deleteRecipe} from "../actions/index.js";
 import { useDispatch } from "react-redux";
 import { changePopup } from "../actions/index.js";
+import { Instructions } from "./Instructions";
 
 export const RecipeCard = (props) => {
 	const dispatch = useDispatch();
