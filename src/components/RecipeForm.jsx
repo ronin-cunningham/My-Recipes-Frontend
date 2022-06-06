@@ -10,22 +10,9 @@ export const RecipeForm = () => {
 	const [instructions, setInstructions] = useState("");
 	const [enabled, setEnabled] = useState(false);
 
-	const handleSubmit = (event) => {
-		dispatch(addRecipe(
-			{
-				title: title,
-				ingredients: ingredients,
-				instructions: instructions,
-				uniqueId: Math.random().toString(16).slice(2)
-			}
-		));
-
-		setTitle("");
-		setIngredients("");
-		setInstructions("");
-
-		event.preventDefault();
-	}
+	useEffect(() => {
+		setEnabled(title.length > 0 && ingredients.length > 0 && instructions.length > 0);
+	}, [enabled, title, ingredients, instructions]);
 
 	const changeTitle = (event) => {
 		setTitle(event.target.value);
@@ -39,9 +26,26 @@ export const RecipeForm = () => {
 		setInstructions(event.target.value);
 	}
 
-	useEffect(() => {
-		setEnabled(title.length > 0 && ingredients.length > 0 && instructions.length > 0);
-	}, [enabled, title, ingredients, instructions]);
+	const handleSubmit = (event) => {
+		dispatch(addRecipe(
+			{
+				title: title,
+				ingredients: ingredients,
+				instructions: instructions,
+				uniqueId: Math.random().toString(16).slice(2)
+			}
+		));
+
+		clearForm();
+
+		event.preventDefault();
+	}
+
+	const clearForm = () => {
+		setTitle("");
+		setIngredients("");
+		setInstructions("");
+	};
 
 	return (
 		<form className="recipe-form" onSubmit={handleSubmit}>
@@ -57,7 +61,10 @@ export const RecipeForm = () => {
 				Instructions:
 				<input type="text" value={instructions} onChange={changeInstructions} />
 			</label>
+			<div>
+			<input type="button" value="Clear Form" onClick={() => clearForm()} />
 			<input type="submit" value="Add Recipe" disabled={!enabled}/>
+			</div>
 		</form>
 	);
 }
