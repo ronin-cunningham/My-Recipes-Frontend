@@ -49,21 +49,23 @@ export const RecipeForm = () => {
 
 	return (
 		<form className="recipe-form" onSubmit={handleSubmit}>
-			<label>
-				Title:
-				<input type="text" value={title} onChange={changeTitle} />
-			</label>
-			<label>
-				Ingredients:
-				<input type="text" value={ingredients} onChange={changeIngredients} />
-			</label>
-			<label>
-				Instructions:
-				<input type="text" value={instructions} onChange={changeInstructions} />
-			</label>
-			<div>
-			<input type="button" value="Clear Form" onClick={() => clearForm()} />
-			<input type="submit" value="Add Recipe" disabled={!enabled}/>
+			<div className="recipe-inputs">
+				<label className="recipe-field">
+					Title:
+					<input type="text" value={title} onChange={changeTitle} />
+				</label>
+				<label className="recipe-field">
+					Ingredients:
+					<input type="text" value={ingredients} onChange={changeIngredients} />
+				</label>
+				<label className="recipe-field">
+					Instructions:
+					<input type="text" value={instructions} onChange={changeInstructions} />
+				</label>
+			</div>
+			<div className="recipe-buttons">
+				<input type="button" value="Clear Form" onClick={() => clearForm()} />
+				<input type="submit" value="Add Recipe" disabled={!enabled}/>
 			</div>
 		</form>
 	);

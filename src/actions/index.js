@@ -11,3 +11,10 @@ export const deleteRecipe = id => {
 		payload: id
 	}
 }
+
+export const changePopup = popup => {
+	return {
+		type: 'CHANGE_POPUP',
+		payload: popup
+	}
+}
