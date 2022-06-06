@@ -1,0 +1,31 @@
+.recipe-form {
+	display: flex;
+	flex-direction: column;
+	margin: 100px;
+}
+
+.recipe-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.recipe-field {
+    margin: 5px;
+}
+
+.recipe-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.recipe-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 15px;
+}
+
+.recipe-field input {
+    margin-left: 10px;
+}
