@@ -1,6 +1,6 @@
 import "../styles/RecipeForm.css";
 import { useDispatch } from "react-redux";
-import { addRecipe } from "../actions/index.js";
+import { addRecipe } from "../redux/actions/index.js";
 import { useEffect, useState } from "react";
 
 export const RecipeForm = () => {

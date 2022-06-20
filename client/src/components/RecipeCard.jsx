@@ -1,5 +1,5 @@
 import "../styles/RecipeCard.css";
-import { deleteRecipe} from "../actions/index.js";
+import { deleteRecipe} from "../redux/actions/index.js";
 import { useDispatch } from "react-redux";
 import { Instructions } from "./Instructions";
 import { useState } from "react";
