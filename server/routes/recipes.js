@@ -3,7 +3,7 @@ var router = express.Router();
 const { v4: uuid } = require('uuid');
 
 // Injecting mock data
-let recipes = [
+const recipesJSON = JSON.stringify([
 	{
 		title: "Pizza",
 		ingredients: "dough, salami, cheese",
@@ -16,14 +16,17 @@ let recipes = [
 		instructions: "Knead the dough, add the tomatoes and cheese, boil the pasta, pour sauce",
 		uniqueId: uuid()
 	}
-];
+])
+
+
+
+let recipes = JSON.parse(recipesJSON);
 
 router.get('/', function(req, res, next) {
   res.send(recipes);
 });
 
 router.post('/', function (req, res, next) {
-  console.log(req.body)
   if (Object.keys(req.body).length === 0) {
     return res.status(400).send({ message: 'Recipe must have a body of data!' })
   }
@@ -53,7 +56,7 @@ router.get('/instructions/:uniqueId', function (req, res, next) {
 
   if (!foundRecipe) return res.status(404).send({ message: 'Recipe not found' });
 
-  return res.send(foundRecipe.instructions);
+  return res.send(JSON.stringify(foundRecipe.instructions));
 })
 
 router.delete('/all', function (req, res, next) {

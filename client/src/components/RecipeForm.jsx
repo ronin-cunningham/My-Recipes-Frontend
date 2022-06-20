@@ -1,7 +1,8 @@
 import "../styles/RecipeForm.css";
 import { useDispatch } from "react-redux";
-import { addRecipe } from "../redux/actions/index.js";
 import { useEffect, useState } from "react";
+import { addRecipeAsync, deleteAllRecipesAsync } from "../redux/recipes/thunks";
+const { v4: uuid } = require('uuid');
 
 export const RecipeForm = () => {
 	const dispatch = useDispatch();
@@ -27,12 +28,12 @@ export const RecipeForm = () => {
 	}
 
 	const handleSubmit = (event) => {
-		dispatch(addRecipe(
+		dispatch(addRecipeAsync(
 			{
 				title: title,
 				ingredients: ingredients,
 				instructions: instructions,
-				uniqueId: Math.random().toString(16).slice(2)
+				uniqueId: uuid()
 			}
 		));
 
@@ -46,6 +47,10 @@ export const RecipeForm = () => {
 		setIngredients("");
 		setInstructions("");
 	};
+
+	const deleteAllRecipes = () => {
+		dispatch(deleteAllRecipesAsync());
+	}
 
 	return (
 		<form className="recipe-form" onSubmit={handleSubmit}>
@@ -66,6 +71,7 @@ export const RecipeForm = () => {
 			<div className="recipe-buttons">
 				<input type="button" value="Clear Form" onClick={() => clearForm()} />
 				<input type="submit" value="Add Recipe" disabled={!enabled}/>
+				<input type="button" value="DELETE ALL RECIPES" className="danger" onClick={() => deleteAllRecipes()} />
 			</div>
 		</form>
 	);

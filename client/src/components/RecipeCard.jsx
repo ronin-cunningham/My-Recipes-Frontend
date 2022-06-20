@@ -1,25 +1,43 @@
 import "../styles/RecipeCard.css";
-import { deleteRecipe} from "../redux/actions/index.js";
 import { useDispatch } from "react-redux";
 import { Instructions } from "./Instructions";
 import { useState } from "react";
+import { deleteRecipeAsync } from "../redux/recipes/thunks";
 
 export const RecipeCard = (props) => {
 	const dispatch = useDispatch();
 	const [show, setShow] = useState(false);
+	const [instructions, setInstructions] = useState("");
 
 	const deleteRecipeCard = () => {
-		dispatch(deleteRecipe(props.uniqueId));
+		dispatch(deleteRecipeAsync(props.uniqueId));
 	};
+
+	const getInstructions = async () => {
+		fetch(`http://localhost:3001/recipes/instructions/${props.uniqueId}`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			  },
+		})
+		.then(response => response.json())
+		.then(data => {
+			setInstructions(data);
+			setShow(true);
+		})
+		.catch(err => {
+			console.log(err);
+		});
+	}
 
 	return (
 		<div>
-			{show ? <Instructions setShow={setShow} instructions={props.instructions} /> : null}
+			{show ? <Instructions setShow={setShow} instructions={instructions} /> : null}
 			<div className="card">
 				<div className="card-buttons">
 					<button className="delete-card" onClick={() => deleteRecipeCard()}><b>X</b></button>
 				</div>
-				<div className="container" onClick={() => setShow(true)}>
+				<div className="container" onClick={() => getInstructions()}>
 					<div className="card-header">
 						<h2><b>{props.title}</b></h2>
 					</div>

@@ -26,6 +26,10 @@
     margin-top: 15px;
 }
 
+.recipe-buttons .danger {
+    background-color: red;
+}
+
 .recipe-field input {
     margin-left: 10px;
 }
