@@ -1,28 +1,13 @@
 var express = require('express');
+const Recipe = require('../mongodb/model');
 var router = express.Router();
+const recipeModel = require("../mongodb/model");
 const { v4: uuid } = require('uuid');
 
-// Injecting mock data
-const recipesJSON = JSON.stringify([
-	{
-		title: "Pizza",
-		ingredients: "dough, salami, cheese",
-		instructions: "Knead the dough, add the salami and cheese, bake in oven",
-		uniqueId: uuid()
-	},
-	{
-		title: "Pasta",
-		ingredients: "dough, tomatoes, cheese",
-		instructions: "Knead the dough, add the tomatoes and cheese, boil the pasta, pour sauce",
-		uniqueId: uuid()
-	}
-])
+// let recipes = JSON.parse(recipesJSON);
 
-
-
-let recipes = JSON.parse(recipesJSON);
-
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
+  const recipes = await recipeModel.find({});
   res.send(recipes);
 });
 
@@ -38,30 +23,28 @@ router.post('/', function (req, res, next) {
     uniqueId: uuid() 
   };
   
-  recipes.push(recipe);
+  const dbRecipe = new Recipe(recipe);
+  dbRecipe.save();
   return res.send(recipe);
 });
 
-router.delete('/delete/:uniqueId', function (req, res, next) {
-  const length = recipes.length;
-  recipes = recipes.filter(x => x.uniqueId !== req.params.uniqueId);
-  
-  if (length === recipes.length) return res.status(404).send({ message: 'Recipe not found' })
-
-  return res.send(recipes);
+router.delete('/delete/:uniqueId', async function (req, res, next) {
+  const recipes = await recipeModel.deleteOne({ uniqueId: req.params.uniqueId });
+  const newRecipes = await recipeModel.find({});
+  return res.send(newRecipes);
 });
 
-router.get('/instructions/:uniqueId', function (req, res, next) {
-  const foundRecipe = recipes.find(x => x.uniqueId === req.params.uniqueId);
+// router.get('/instructions/:uniqueId', function (req, res, next) {
+//   const foundRecipe = recipes.find(x => x.uniqueId === req.params.uniqueId);
 
-  if (!foundRecipe) return res.status(404).send({ message: 'Recipe not found' });
+//   if (!foundRecipe) return res.status(404).send({ message: 'Recipe not found' });
 
-  return res.send(JSON.stringify(foundRecipe.instructions));
-})
+//   return res.send(JSON.stringify(foundRecipe.instructions));
+// })
 
-router.delete('/all', function (req, res, next) {
-  recipes = [];
-  return res.send(recipes);
-})
+// router.delete('/all', function (req, res, next) {
+//   recipes = [];
+//   return res.send(recipes);
+// })
 
 module.exports = router;

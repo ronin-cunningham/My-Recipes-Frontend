@@ -4,6 +4,19 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors')
 
+const mongoose = require("mongoose");
+const generateData = require('./mongodb/generate-data');
+
+mongoose.connect('mongodb://localhost:27017/sandbox');
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error: "));
+db.once("open", function () {
+  console.log("Connected successfully");
+  
+//   uncomment to re-generate data
+//   generateData();
+});
+
 var indexRouter = require('./routes/index');
 var recipesRouter = require('./routes/recipes');
 
