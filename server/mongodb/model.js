@@ -6,7 +6,7 @@ const recipeSchema = new mongoose.Schema({
 	ingredients: String,
 	instructions: String,
 	uniqueId: String,
-	// completionTime: Number,
+	completionTime: String,
 });
 
 recipeSchema.methods.speak = function speak() {

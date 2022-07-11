@@ -9,11 +9,12 @@ export const RecipeForm = () => {
 	const [title, setTitle] = useState("");
 	const [ingredients, setIngredients] = useState("");
 	const [instructions, setInstructions] = useState("");
+	const [completionTime, setCompletionTime] = useState("");
 	const [enabled, setEnabled] = useState(false);
 
 	useEffect(() => {
-		setEnabled(title.length > 0 && ingredients.length > 0 && instructions.length > 0);
-	}, [enabled, title, ingredients, instructions]);
+		setEnabled(title.length > 0 && ingredients.length > 0 && instructions.length > 0 && completionTime.length > 0);
+	}, [enabled, title, ingredients, instructions, completionTime]);
 
 	const changeTitle = (event) => {
 		setTitle(event.target.value);
@@ -27,13 +28,18 @@ export const RecipeForm = () => {
 		setInstructions(event.target.value);
 	}
 
+	const changeCompletionTime = (event) => {
+		setCompletionTime(event.target.value);
+	}
+
 	const handleSubmit = (event) => {
 		dispatch(addRecipeAsync(
 			{
 				title: title,
 				ingredients: ingredients,
 				instructions: instructions,
-				uniqueId: uuid()
+				uniqueId: uuid(),
+				completionTime: completionTime
 			}
 		));
 
@@ -46,6 +52,7 @@ export const RecipeForm = () => {
 		setTitle("");
 		setIngredients("");
 		setInstructions("");
+		setCompletionTime("");
 	};
 
 	const deleteAllRecipes = () => {
@@ -66,6 +73,10 @@ export const RecipeForm = () => {
 				<label className="recipe-field">
 					Instructions:
 					<input type="text" value={instructions} onChange={changeInstructions} />
+				</label>
+				<label className="recipe-field">
+					Completion Time:
+					<input type="text" value={completionTime} onChange={changeCompletionTime} />
 				</label>
 			</div>
 			<div className="recipe-buttons">

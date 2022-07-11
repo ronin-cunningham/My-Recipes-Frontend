@@ -20,7 +20,8 @@ router.post('/', function (req, res, next) {
     title: req.body.title, 
     ingredients: req.body.ingredients, 
     instructions: req.body.instructions, 
-    uniqueId: uuid() 
+    uniqueId: uuid(),
+    completionTime: req.body.completionTime
   };
   
   const dbRecipe = new Recipe(recipe);
@@ -34,13 +35,15 @@ router.delete('/delete/:uniqueId', async function (req, res, next) {
   return res.send(newRecipes);
 });
 
-// router.get('/instructions/:uniqueId', function (req, res, next) {
-//   const foundRecipe = recipes.find(x => x.uniqueId === req.params.uniqueId);
+router.get('/instructions/:uniqueId', async function (req, res, next) {
+  const foundRecipe = await recipeModel.find({uniqueId: req.params.uniqueId});
 
-//   if (!foundRecipe) return res.status(404).send({ message: 'Recipe not found' });
-
-//   return res.send(JSON.stringify(foundRecipe.instructions));
-// })
+  if (!foundRecipe) {
+    console.log("asd");
+    return res.status(404).send({ message: 'Recipe not found' });
+  }
+  return res.send(JSON.stringify(foundRecipe));
+})
 
 // router.delete('/all', function (req, res, next) {
 //   recipes = [];

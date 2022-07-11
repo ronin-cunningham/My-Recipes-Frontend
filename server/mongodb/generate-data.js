@@ -7,13 +7,15 @@ function generateData() {
 		title: "Pizza",
 		ingredients: "dough, salami, cheese",
 		instructions: "Knead the dough, add the salami and cheese, bake in oven",
-		uniqueId: uuid()
+		uniqueId: uuid(),
+		completionTime: "60"
 	})
     const pasta = new Recipe({
 		title: "Pasta",
 		ingredients: "dough, tomatoes, cheese",
 		instructions: "Knead the dough, add the tomatoes and cheese, boil the pasta, pour sauce",
-		uniqueId: uuid()
+		uniqueId: uuid(),
+		completionTime: "90"
 	});
     
     // Save a sandwich to db

@@ -8,12 +8,13 @@ export const RecipeCard = (props) => {
 	const dispatch = useDispatch();
 	const [show, setShow] = useState(false);
 	const [instructions, setInstructions] = useState("");
+	const [completionTime, setCompletionTime] = useState("");
 
 	const deleteRecipeCard = () => {
 		dispatch(deleteRecipeAsync(props.uniqueId));
 	};
 
-	const getInstructions = async () => {
+	const getInstructionsAndCompletionTime = async () => {
 		fetch(`http://localhost:3001/recipes/instructions/${props.uniqueId}`, {
 			method: 'GET',
 			headers: {
@@ -22,7 +23,8 @@ export const RecipeCard = (props) => {
 		})
 		.then(response => response.json())
 		.then(data => {
-			setInstructions(data);
+			setInstructions(data[0].instructions);
+			setCompletionTime(data[0].completionTime);
 			setShow(true);
 		})
 		.catch(err => {
@@ -32,12 +34,12 @@ export const RecipeCard = (props) => {
 
 	return (
 		<div>
-			{show ? <Instructions setShow={setShow} instructions={instructions} /> : null}
+			{show ? <Instructions setShow={setShow} instructions={instructions} completionTime={completionTime} /> : null}
 			<div className="card">
 				<div className="card-buttons">
 					<button className="delete-card" onClick={() => deleteRecipeCard()}><b>X</b></button>
 				</div>
-				<div className="container" onClick={() => getInstructions()}>
+				<div className="container" onClick={() => getInstructionsAndCompletionTime()}>
 					<div className="card-header">
 						<h2><b>{props.title}</b></h2>
 					</div>
