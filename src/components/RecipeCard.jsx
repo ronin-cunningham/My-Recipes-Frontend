@@ -15,7 +15,7 @@ export const RecipeCard = (props) => {
 	};
 
 	const getInstructionsAndCompletionTime = async () => {
-		fetch(`http://localhost:3001/recipes/instructions/${props.uniqueId}`, {
+		fetch(`https://ronin-recipe-server.herokuapp.com/recipes/instructions/${props.uniqueId}`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json'

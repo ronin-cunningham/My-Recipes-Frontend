@@ -1,5 +1,5 @@
 const addRecipe = async (recipe) => {
-	const response = await fetch('http://localhost:3001/recipes', {
+	const response = await fetch('https://ronin-recipe-server.herokuapp.com/recipes', {
 	  method: 'POST',
 	  headers: {
 		'Content-Type': 'application/json'
@@ -17,21 +17,21 @@ const addRecipe = async (recipe) => {
   };
   
 const getRecipes = async () => {
-	const response = await fetch('http://localhost:3001/recipes', {
+	const response = await fetch('https://ronin-recipe-server.herokuapp.com/recipes', {
 		method: 'GET'
 	});
 	return response.json();
 };
 
 const deleteRecipe = async (uniqueId) => {
-	const response = await fetch(`http://localhost:3001/recipes/delete/${uniqueId}`, {
+	const response = await fetch(`https://ronin-recipe-server.herokuapp.com/recipes/delete/${uniqueId}`, {
 		method: 'DELETE'
 	});
 	return response.json();
 };
 
 const deleteAllRecipes = async () => {
-	const response = await fetch(`http://localhost:3001/recipes/all`, {
+	const response = await fetch(`https://ronin-recipe-server.herokuapp.com/recipes/all`, {
 		method: 'DELETE'
 	});
 	return response.json();
